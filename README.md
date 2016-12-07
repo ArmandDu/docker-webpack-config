@@ -76,3 +76,8 @@ In production, you have to use the `docker-compse.production.yml` file, it will 
 ```Shell
 docker-compose -f docker-compose.production.yml up
 ```
+
+# Resources
+
+This project was made using external projects:
+- modifications of this webpack starter: [react-webpack-babel](https://github.com/alicoding/react-webpack-babel)

@@ -1,0 +1,9 @@
+node_modules/
+public/
+dist/
+.git/
+README.md
+.gitignore
+.editorconfig
+.eslintrc.yml
+.jshintrc

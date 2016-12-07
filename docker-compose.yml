@@ -2,7 +2,7 @@ version: '2'
 
 services:
   web:
-    build: client
+    build: client/
     container_name: web-dev
     ports:
       - 8000:8000
@@ -17,26 +17,26 @@ services:
       - NODE_ENV=dev
 #      - API_ROOT_URL:api    #helper
 
-#  api:
-#    build: server/
-#    container_name: api-dev
-#    volumes:
-#      - ./server:/app
-#    ports:
-#      - 3000:3000
+  api:
+    build: server/
+    container_name: api-dev
+    volumes:
+      - ./server:/app
+    ports:
+      - 3000:3000
 #    links:                  #link your db here...
 #      - db:db
 #    external_links:        #...or use a db outside this docker-compose
 #     - some-db:db
-#
-#    env_file:               #carefull, env set in 'environment:' will overwride those in .env files
-#      - .env
+
+    env_file:               #carefull, env set in 'environment:' will overwride those in .env files
+      - .env
 #      - server/.env
 #    environment:
 #      - DB_PROTOCOL=mongodb #helper
 #      - DB_HOST=db          #helper, you should update this with login password or add a DB_USER, DB_PASSWORD env var
 #      - DB_NAME=mydb        #ususally define this in .env file (along with DB_USER, DB_PASSWORD
-#
+
 #  db:
 #    image: mongo            #or whatever you want
 #    volumes:

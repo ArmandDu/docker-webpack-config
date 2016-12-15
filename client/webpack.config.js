@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || "8000";
@@ -19,7 +20,7 @@ loaders.push({
 // local scss modules
 loaders.push({
 	test: /\.scss$/,
-	exclude: /[\/\\](node_modules|bower_components|public)[\/\\]/,
+	exclude: /[\/\\](node_modules|bower_components|public\/)[\/\\]/,
 	loaders: [
 		'style?sourceMap',
 		'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
@@ -31,7 +32,7 @@ loaders.push({
 // local css modules
 loaders.push({
 	test: /\.css$/,
-	exclude: /[\/\\](node_modules|bower_components|public)[\/\\]/,
+	exclude: /[\/\\](node_modules|bower_components|public\/)[\/\\]/,
 	loaders: [
 		'style?sourceMap',
 		'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
@@ -75,6 +76,7 @@ module.exports = {
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
+		new DashboardPlugin(),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			title: 'App Name'

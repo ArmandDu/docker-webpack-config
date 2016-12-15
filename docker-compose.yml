@@ -8,8 +8,8 @@ services:
       - 8000:8000
     volumes:
       - ./client/:/base/app/
-#    links:
-#      - api
+    links:
+      - api
     env_file:               #carefull, env set in 'environment:' will overwride those in .env files
       - .env
       - client/.env
@@ -31,8 +31,9 @@ services:
 
     env_file:               #carefull, env set in 'environment:' will overwride those in .env files
       - .env
-#      - server/.env
-#    environment:
+      - server/.env
+    environment:
+      - NODE_ENV=dev
 #      - DB_PROTOCOL=mongodb #helper
 #      - DB_HOST=db          #helper, you should update this with login password or add a DB_USER, DB_PASSWORD env var
 #      - DB_NAME=mydb        #ususally define this in .env file (along with DB_USER, DB_PASSWORD

@@ -68,16 +68,25 @@ In development, You can run this command to start the everything in dev mode:
 docker-compose up -d
 ```
 
+#### issues
 
+- /!\ currently server will not reload on code change this need to be fixed
 
-### Production (coming soon)
+### Production
 
 In production, you have to use the `docker-compse.production.yml` file, it will build the new docker images with production code
 ```Shell
 docker-compose -f docker-compose.production.yml up
 ```
 
+# TODO
+
+- Better production config
+        > currently production consist of mainly creating the minimized bundle and running a static server inside a docker process
+- fix issue with server-side reloading
+        > nodemon is not reloading the server when code changed
+- some automated testing
 # Resources
 
-This project was made using external projects:
-- modifications of this webpack starter: [react-webpack-babel](https://github.com/alicoding/react-webpack-babel)
+This project contains external resources:
+- react webpack config forked from: [react-webpack-babel](https://github.com/alicoding/react-webpack-babel)

@@ -27,7 +27,7 @@ loaders.push({
 
 module.exports = {
 	entry: [
-		'./src/index.jsx'
+		'./src/index.js'
 	],
 	output: {
 		publicPath: '/',
@@ -60,7 +60,7 @@ module.exports = {
 			allChunks: true
 		}),
 		new HtmlWebpackPlugin({
-			template: './src/template.html',
+			template: './src/index.html',
 			title: 'App Name'
 		}),
 		new webpack.optimize.DedupePlugin()

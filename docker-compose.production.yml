@@ -1,0 +1,61 @@
+version: '2'
+
+services:
+  web:
+    build: client/
+    container_name: web
+    command: "bash -c 'npm run build && npm run serve'"       #build and run for now; TODO: do it in a better way
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ./client/:/base/app/
+    links:
+      - api
+    env_file:               #carefull, env set in 'environment:' will overwride those in .env files
+      - .env                #or .env.production...
+      - client/.env         #or .env.production...
+    environment:
+      - NODE_ENV=production
+#      - VIRTUAL_HOST=myapp.mydomain.com
+#      - API_ROOT_URL:api    #helper
+
+#    networks:              #if using nginx reverse proxy in separated docker-compose (related gist: https://gist.github.com/ArmandDu/07dfd8ce2cb0d513fad8f0004afddc83)
+#      - proxy-tier
+
+  api:
+    build: server/
+    container_name: api
+    command: "bash -c 'npm run build && npm run serve'"
+    restart: always
+    volumes:
+      - ./server:/app
+    ports:
+      - 3000:3000
+#    links:                  #link your db here...
+#      - db:db
+#    external_links:        #...or use a db outside this docker-compose
+#     - some-db:db
+    env_file:               #carefull, env set in 'environment:' will overwride those in .env files
+      - .env                #or .env.production...
+      - server/.env         #or .env.production...
+    environment:
+      - NODE_ENV=production
+#      - VIRTUAL_HOST=myapi.mydomain.com
+#      - DB_PROTOCOL=mongodb #helper
+#      - DB_HOST=db          #helper, you should update this with login password or add a DB_USER, DB_PASSWORD env var
+#      - DB_NAME=mydb        #ususally define this in .env file (along with DB_USER, DB_PASSWORD
+
+#    networks:              #if using nginx reverse proxy in separated docker-compose (related gist: https://gist.github.com/ArmandDu/07dfd8ce2cb0d513fad8f0004afddc83)
+#      - proxy-tier
+
+#  db:
+#    image: mongo            #or whatever you want
+#    volumes:
+#      - ./data:/data/db
+
+#if using nginx reverse proxy in separated docker-compose (related gist: https://gist.github.com/ArmandDu/07dfd8ce2cb0d513fad8f0004afddc83)
+#networks:
+#  proxy-tier:
+#    external:
+#      name: #your-network-name
